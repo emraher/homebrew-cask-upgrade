@@ -9,26 +9,30 @@ module Bcu
   def self.process(args)
     parse!(args)
 
-    unless options.quiet
-      ohai "Options"
-      puts "Include auto-update (-a): #{Formatter.colorize(options.all, options.all ? "green" : "red")}"
-      puts "Include latest (-f): #{Formatter.colorize(options.force, options.force ? "green" : "red")}"
-    end
+    if options.list
+      outdated, state_info = find_outdated_apps(options.quiet)
+      print_app_list(outdated, state_info)
+    else
+      unless options.quiet
+        ohai "Options"
+        puts "Include auto-update (-a): #{Formatter.colorize(options.all, options.all ? "green" : "red")}"
+        puts "Include latest (-f): #{Formatter.colorize(options.force, options.force ? "green" : "red")}"
+      end
 
-    unless options.no_brew_update
-      ohai "Updating Homebrew"
-      puts Hbc.brew_update
-    end
+      unless options.no_brew_update
+        ohai "Updating Homebrew"
+        puts Hbc.brew_update
+      end
 
-    ohai "Finding outdated apps"
-    outdated, state_info = find_outdated_apps(options.quiet)
-    if outdated.empty?
-      puts "No outdated apps found." if options.quiet
-      return
-    end
+      ohai "Finding outdated apps"
+      outdated, state_info = find_outdated_apps(options.quiet)
+      if outdated.empty?
+        puts "No outdated apps found." if options.quiet
+        return
+      end
 
-    ohai "Found outdated apps"
-    print_app_table(outdated, state_info)
+      ohai "Found outdated apps"
+      print_app_table(outdated, state_info)
 
     if options.dry_run
       printf "\nDo you want to upgrade %d app%s [y/N]? ", outdated.length, (outdated.length > 1) ? "s" : ""
@@ -58,6 +62,7 @@ module Bcu
 
     Hbc::CLI::Cleanup.run if options.cleanup
   end
+end
 
   def self.find_outdated_apps(quiet)
     outdated = []
@@ -141,5 +146,13 @@ module Bcu
     end
 
     puts Formatter.table(table)
+  end
+
+  def self.print_app_list(apps, state_info)
+    elements = []
+    apps.each_with_index do |app, i|
+      elements.push(app[:token])
+    end
+    puts elements.join("\n")
   end
 end

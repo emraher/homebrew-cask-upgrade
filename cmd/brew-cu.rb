@@ -24,6 +24,8 @@
 #:
 #:    If `--quiet` or `-q` is passed, do not show information about installed
 #:    apps or current options.
+#:
+#:    If `--list` is passed, show only a list of upgradable applications.
 
 require "pathname"
 

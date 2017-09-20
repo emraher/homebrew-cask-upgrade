@@ -13,6 +13,7 @@ module Bcu
     options.dry_run = true
     options.no_brew_update = false
     options.quiet = false
+    options.list = false
 
     parser = OptionParser.new do |opts|
       opts.banner = "Usage: brew cu [CASK] [options]"
@@ -38,6 +39,11 @@ module Bcu
       end
 
       opts.on("-q", "--quiet", "Do not show information about installed apps or current options") do
+        options.quiet = true
+      end
+
+      opts.on("--list", "Show only a list of upgradable casks.") do
+        options.list = true
         options.quiet = true
       end
     end

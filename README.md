@@ -13,7 +13,7 @@ With `brew-cask-upgrade`, you just need to type one command to upgrade all the a
 ## Installation
 
 ```
-brew tap buo/cask-upgrade
+brew tap emraher/cask-upgrade
 ```
 
 ## Usage
@@ -49,6 +49,7 @@ Usage: brew cu [CASK] [options]
                           before checking outdated apps.
     -y, --yes             Update all outdated apps; answer yes to updating packages.
     -q, --quiet           Do not show information about installed apps or current options.
+        --list            Show only a list of upgradable casks.
 ```
 
 Display usage instructions:

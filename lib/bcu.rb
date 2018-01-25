@@ -140,7 +140,7 @@ end
       row << Formatter::TableColumn.new(value: app[:token], color: color)
       row << Formatter::TableColumn.new(value: app[:current].join(","))
       row << Formatter::TableColumn.new(value: app[:version], color: "magenta")
-      row << Formatter::TableColumn.new(value: (app[:auto_updates]) ? " Y " : "", color: "magenta")
+      row << Formatter::TableColumn.new(value: app[:auto_updates] ? " Y " : "", color: "magenta")
       row << Formatter::TableColumn.new(value: result, color: color)
       table << row
     end

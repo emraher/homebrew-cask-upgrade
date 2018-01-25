@@ -1,4 +1,4 @@
-[![status](https://travis-ci.org/buo/homebrew-cask-upgrade.svg?branch=master)](https://travis-ci.org/buo/homebrew-cask-upgrade)
+[![status](https://travis-ci.org/buo/homebrew-cask-upgrade.svg?branch=master)](https://travis-ci.org/emraher/homebrew-cask-upgrade)
 
 # brew-cask-upgrade
 
